@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { TextInput, Button, View, Text } from 'react-native';
+import { TextInput, Button, View, Text, ScrollView } from 'react-native';
 import OurPanel from '../components/OurPanel';
 
 function HomeScreen({ navigation }) {
@@ -8,20 +8,30 @@ function HomeScreen({ navigation }) {
     const [info, setInfo] = useState('');
     const [info2, setInfo2] = useState(2);
     const [showPanel, setShowPanel] = useState(true);
+    const [myArray, setMyArray] = useState(['Elemento 1', 'Elemento 2', 'Elemento 3', 'Elemento 4', 'Elemento 5', 'Elemento 6']);
 
-    const myFunction1 = () =>{
-        console.log("myFunction1");
-        setShowPanel(false);
+    
+
+    const removeCell = (title) =>{
+        console.log("removeCell with title: " + title);
+        setMyArray(currentArray => currentArray.filter(item => item !== title));
     }
 
     const myFunction2 = (info) =>{
         console.log("myFunction2: " + info);
         setInfo("myFunction2: " + info);
     }
+
     return (
     <View>
-        {showPanel &&<OurPanel title='HOla' subtitle= 'Adeu' function1={myFunction1} function2={myFunction2}/>}
+        <Text>TITLE ...</Text>
+        <ScrollView style={{height:"25%"}}>
+            {myArray.map((item, index) => (
+                <OurPanel key={index} title={item}  removeCell={removeCell}/>
+            ))}
+        </ScrollView>
         
+
         <Text>{info}</Text>
        
         <TextInput
