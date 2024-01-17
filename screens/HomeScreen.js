@@ -4,6 +4,7 @@ import { TextInput, Button, View, Text, ScrollView } from 'react-native';
 import OurPanel from '../components/OurPanel';
 
 function HomeScreen({ navigation }) {
+    
     const [text, setText] = useState('');
     const [info, setInfo] = useState('');
     const [info2, setInfo2] = useState(2);
