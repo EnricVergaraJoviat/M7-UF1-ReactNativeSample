@@ -8,7 +8,7 @@ function DetailsScreen({route, navigation}) {
     const { text, info2 } = route.params;
     const mapRef = useRef(null);
     const [markerPosition, setMarkerPosition] = useState(null);
-
+  
     const setMark = async () => {
         console.log("Hola");
         if (mapRef.current) {
@@ -44,10 +44,10 @@ function DetailsScreen({route, navigation}) {
                   )}
               </MapView>
               <View pointerEvents="none" style={styles.mapCenterMarkerView}>
-              <Image 
-                  style={{width:'10%', height:'10%'}}
-                  source={CrosshairImage}  
-              />
+                <Image 
+                    style={{width:'10%', height:'10%'}}
+                    source={CrosshairImage}  
+                />
               </View>
             </View>
              
