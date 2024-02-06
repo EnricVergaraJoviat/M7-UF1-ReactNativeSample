@@ -1,7 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput, Button, View, Text, ScrollView } from 'react-native';
 import OurPanel from '../components/OurPanel';
+import { db } from '../firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
+
 
 function HomeScreen({ navigation }) {
     
@@ -11,6 +14,24 @@ function HomeScreen({ navigation }) {
     const [showPanel, setShowPanel] = useState(true);
     const [myArray, setMyArray] = useState(['Elemento 1', 'Elemento 2', 'Elemento 3', 'Elemento 4', 'Elemento 5', 'Elemento 6']);
 
+    useEffect(() => {
+        // Función para obtener todos los usuarios
+        const fetchUsers = async () => {
+          try {
+          	console.log(db);
+			const usersCol = collection(db, 'Users'); // Accede a la colección 'Users'
+			const userSnapshot = await getDocs(usersCol); // Obtiene todos los documentos
+			const userList = userSnapshot.docs.map(doc => doc.data()); // Mapea cada documento a su data
+			console.log(userList); // Imprime los datos obtenidos
+
+        
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    
+        fetchUsers(); // Llama a la función al inicio
+      }, []);
     
 
     const removeCell = (title) =>{
